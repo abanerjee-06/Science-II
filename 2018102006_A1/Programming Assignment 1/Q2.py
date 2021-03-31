@@ -1,3 +1,10 @@
+"""
+In this question, we are using the M.AaaS1ORF662P gene which is a methyl transferase gene. We are checking for the restriction enzyme called ApoI.
+Recognition site for ApoI is RAATTY. R = A or G  and   Y = C or T
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
 from RE import RE_sites
 
 pairs = {
@@ -8,78 +15,44 @@ pairs = {
 }
 
 DNA_seq = ""
-f = open("seq.txt","r")
+f = open("M.AaaS1ORF662P.txt","r")
 DNA_seq = f.read().replace('\n','').replace('\r','').replace(' ','')
 
 l = len(DNA_seq)
-site_length = [6,8]
 start1 = 0
-start2 = 0
 end1 = 6
-end2 = 8
 L1 = []
-L2 = []
 count = 0
+cuts = []
 
+print("Length of M.AaaS1ORF662P gene = ",l,"nt\n")
 print("UNIQUE SEQUENCES WITH LENGTH 6:\n")
 while (end1-l < 6):
     if (end1 <= l):
         site1 = DNA_seq[start1:end1:] 
-        if (site1[5]==pairs[site1[0]] and site1[4]==pairs[site1[1]] and site1[3]==pairs[site1[2]]):
-            if (site1 not in L1):
-                count += 1
-                L1.append(site1)
-                if (site1 in RE_sites):
-                    if (site1 == "GCTAGC"):             # BmtI and NheI have the same restriction recognition sites, although they cut at different points
-                        print("Site No.: ",count,"\tat ",start1+1," - ",end1,"\tRE Site: ",site1,"\tRE Name: BmtI , NheI")
-                    else:    
-                        print("Site No.: ",count,"\tat ",start1+1," - ",end1,"\tRE Site: ",site1,"\tRE Name: ",RE_sites[site1])
-                else:
-                    print("Site No.: ",count,"\tat ",start1+1," - ",end1,"\tRE Site: ",site1)
-        if (site1[1]=='A' and site1[2]=='A' and site1[3]=='T' and site1[4]=='T' and (site1[0]=='A' or site1[0]=='G') and (site1[5]=='C' or site1[5]=='T')):           # recognition site for ApoI is RAATTY. R = A or G  and   Y = C or T
-            print("Site No.: ",count,"\tat ",start1+1," - ",end1,"\tRE Site: ",site1,"\tRE Name: ApoI")
+        if (site1[1]=='A' and site1[2]=='A' and site1[3]=='T' and site1[4]=='T' and (site1[0]=='A' or site1[0]=='G') and (site1[5]=='C' or site1[5]=='T')):           
+            print("Site No.: ",count,"\tat ",start1+1," - ",end1,"\tRE Site: ",site1,"\tRE Name: ApoI \t cuts after ",start1+1)
+            cuts.append(start1+1)
     else:
         site1 = DNA_seq[start1:l:]+DNA_seq[0:end1-l:]
-        if (site1[5]==pairs[site1[0]] and site1[4]==pairs[site1[1]] and site1[3]==pairs[site1[2]]):
-            if (site1 not in L1):
-                count += 1
-                L1.append(site1)
-                if (site1 in RE_sites):
-                    if (site1 == "GCTAGC"):             # BmtI and NheI have the same restriction recognition sites, although they cut at different points
-                        print("Site No.: ",count,"\tat ",start1+1," - ",end1,"\tRE Site: ",site1,"\tRE Name: BmtI , NheI")
-                    else:    
-                        print("Site No.: ",count,"\tat ",start1+1," - ",end1-l,"\tRE Site: ",site1,"\tRE Name: ",RE_sites[site1])
-                else:
-                    print("Site No.: ",count,"\tat ",start1+1," - ",end1-l,"\tRE Site: ",site1)
-        if (site1[1]=='A' and site1[2]=='A' and site1[3]=='T' and site1[4]=='T' and (site1[0]=='A' or site1[0]=='G') and (site1[5]=='C' or site1[5]=='T')):           # recognition site for ApoI is RAATTY. R = A or G  and  Y = C or T
+        if (site1[1]=='A' and site1[2]=='A' and site1[3]=='T' and site1[4]=='T' and (site1[0]=='A' or site1[0]=='G') and (site1[5]=='C' or site1[5]=='T')):           
             print("Site No.: ",count,"\tat ",start1+1," - ",end1-l,"\tRE Site: ",site1,"\tRE Name: ApoI")
+            cuts.append(start1+1)
 
     start1 += 1
     end1 += 1
 
-count = 0
-
-print("\nUNIQUE SEQUENCES WITH LENGTH 8:\n")
-while (end2-l < 6):
-    if (end2 <= l):
-        site2 = DNA_seq[start2:end2:]
-        if (site2[7]==pairs[site2[0]] and site2[6]==pairs[site2[1]] and site2[5]==pairs[site2[2]] and site2[4] == pairs[site2[3]]):
-            if (site2 not in L2):
-                count += 1
-                L2.append(site2)
-                print("Site No.: ",count,"\tat ",start2+1," - ",end2,"\tRE Site: ",site2)
-        if (site2[0]=='C' and site2[7]=='G' and site2[2]=='C' and site2[5]=='G' and site2[3]=='C' and site2[4]=='G' and (site1[1]=='A' or site1[1]=='G') and (site1[6]=='C' or site1[6]=='T')):       # recognition site for SgrAI is CRCCGGYG
-            print("Site No.: ",count,"\tat ",start2+1," - ",end2,"\tRE Site: ",site2,"\tRE Name: SgrAI")                             # R = A or G  and   Y = C or T
-    else:
-        site2 = DNA_seq[start2:l:]+DNA_seq[0:end2-l:]
-        if (site2[7]==pairs[site2[0]] and site2[6]==pairs[site2[1]] and site2[5]==pairs[site2[2]] and site2[4] == pairs[site2[3]]):
-            if (site2 not in L2):
-                count += 1
-                L2.append(site2)
-                print("Site No.: ",count,"\tat ",start2+1," - ",end2-l,"\tRE Site: ",site2)
-        if (site2[0]=='C' and site2[7]=='G' and site2[2]=='C' and site2[5]=='G' and site2[3]=='C' and site2[4]=='G' and (site1[1]=='A' or site1[1]=='G') and (site1[6]=='C' or site1[6]=='T')):       # recognition site for SgrAI is CRCCGGYG
-            print("Site No.: ",count,"\tat ",start2+1," - ",end2-l,"\tRE Site: ",site2,"\tRE Name: SgrAI")                             # R = A or G  and   Y = C or T
-
-    start2 += 1
-    end2 += 1
-
+plt.figure(figsize=(10,10))
+x1 = np.linspace(1,l)
+y1 = np.zeros(len(x1))
+plt.plot(x1,y1,color='#1507ec',linewidth=8)
+colors = ['red','orange','yellow','green','brown','violet']
+for i in range(len(cuts)):
+    y = np.linspace(0,9-i)
+    x = cuts[i] * np.ones(len(y))
+    plt.plot(x,y,color=colors[i],linewidth=2,linestyle=':')
+    plt.text(cuts[i]-2,y[-1],'ApoI ('+str(cuts[i])+')',fontsize=12)
+plt.xlabel('M.AaaS1ORF662P gene [length = '+str(l)+'nt]')
+plt.ylabel('Cut positions for ApoI')
+plt.title('Restriction Map for ApoI in M.AaaS1ORF662P gene')
+plt.show()

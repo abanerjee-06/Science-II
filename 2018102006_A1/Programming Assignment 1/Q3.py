@@ -12,7 +12,6 @@ f = open("pbr322.txt","r")
 DNA_seq = f.read().replace('\n','').replace('\r','')
 
 l = len(DNA_seq)
-site_length = [4,6,8]
 start1 = 0
 start2 = 0
 start3 = 0
@@ -24,6 +23,7 @@ L2 = []
 L3 = []
 count = 0
 
+print("Length of pBR322 sequence = ",l,"bp\n")
 print("UNIQUE SEQUENCES WITH LENGTH 4:\n")
 while (end1-l < 4):
     if (end1 <= l):
