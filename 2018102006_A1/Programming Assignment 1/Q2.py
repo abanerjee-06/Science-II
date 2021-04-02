@@ -27,36 +27,41 @@ l = len(DNA_seq)
 start1 = 0
 end1 = 6
 L1 = []
-count = 0
-cuts = []
+count = 1
+cuts = [0]
 
-print("Length of M.AaaS1ORF662P gene = ",l,"nt\n")
+print("Length of M.AaaS1ORF662P gene = ",l,"bp\n")
 while (end1-l < 6):
     if (end1 <= l):
         site1 = DNA_seq[start1:end1:] 
         if (site1[1]=='A' and site1[2]=='A' and site1[3]=='T' and site1[4]=='T' and (site1[0]=='A' or site1[0]=='G') and (site1[5]=='C' or site1[5]=='T')):           
             print("Site No.: ",count,"\tat ",start1+1," - ",end1,"\tRE Site: ",site1,"\tRE Name: ApoI \t cuts after ",start1+1)
             cuts.append(start1+1)
+            count += 1
     else:
         site1 = DNA_seq[start1:l:]+DNA_seq[0:end1-l:]
         if (site1[1]=='A' and site1[2]=='A' and site1[3]=='T' and site1[4]=='T' and (site1[0]=='A' or site1[0]=='G') and (site1[5]=='C' or site1[5]=='T')):           
             print("Site No.: ",count,"\tat ",start1+1," - ",end1-l,"\tRE Site: ",site1,"\tRE Name: ApoI")
             cuts.append(start1+1)
+            count += 1
 
     start1 += 1
     end1 += 1
 
-plt.figure(figsize=(10,10))
-x1 = np.linspace(1,l)
-y1 = np.zeros(len(x1))
-plt.plot(x1,y1,color='#1507ec',linewidth=8)
-colors = ['red','orange','yellow','green','brown','violet']
+for i in range(1,count):
+    print("Fragment No.: ",i,"\tof length ",cuts[i]-cuts[i-1],"bp")
+    cuts[i-1] = cuts[i] - cuts[i-1]
+print("Fragment No.: ",count,"\tof length ",l-cuts[-1],"bp")
+cuts[-1] = l-cuts[-1]
+
+plt.figure(figsize=(3,10))
+colors = ['#eb3434','orange','#b5561f','#96790f','#0f593f','brown','#750970']
 for i in range(len(cuts)):
-    y = np.linspace(0,9-i)
-    x = cuts[i] * np.ones(len(y))
+    x = np.linspace(0,5)
+    y = cuts[i] * np.ones(len(x))
     plt.plot(x,y,color=colors[i],linewidth=2,linestyle=':')
-    plt.text(cuts[i]-2,y[-1],'ApoI ('+str(cuts[i])+')',fontsize=12)
-plt.xlabel('M.AaaS1ORF662P gene [length = '+str(l)+'nt]')
-plt.ylabel('Cut positions for ApoI')
+    plt.text(3-((~i) & 1),cuts[i]+2,'ApoI ('+str(cuts[i])+')',fontsize=12)
+plt.xlabel('')
+plt.ylabel('Fragment length (bp)')
 plt.title('Restriction Map for ApoI in M.AaaS1ORF662P gene')
 plt.show()
