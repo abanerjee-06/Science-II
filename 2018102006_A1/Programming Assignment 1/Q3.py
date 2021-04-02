@@ -11,7 +11,7 @@ DNA_seq = ""
 f = open("pbr322.txt","r")
 DNA_seq = f.read().replace('\n','').replace('\r','')
 
-l = len(DNA_seq)
+l = len(DNA_seq)                    # Sequences of lengths 4,6,8
 start1 = 0
 start2 = 0
 start3 = 0
@@ -23,9 +23,13 @@ L2 = []
 L3 = []
 count = 0
 
+# Accounting for circular gene sequence for all the 3 different lengths. 
+# Checking for various gene sequences. Some like ApoI, BmtI, NheI are very specific in their restriction sites, so 
+# we need to have special if conditions for them
+
 print("Length of pBR322 sequence = ",l,"bp\n")
 print("UNIQUE SEQUENCES WITH LENGTH 4:\n")
-while (end1-l < 4):
+while (end1-l < 4):                             
     if (end1 <= l):
         site1 = DNA_seq[start1:end1:] 
         if (site1[3]==pairs[site1[0]] and site1[2]==pairs[site1[1]]):
@@ -57,9 +61,9 @@ while (end2-l < 6):
                 if (site2 in RE_sites):
                     if (site2 == "gctagc"):             # BmtI and NheI have the same restriction recognition sites, although they cut at different points
                         print("Site No.: ",count,"\tat ",start2+1," - ",end2,"\tRE Site: ",site2,"\tRE Name: BmtI , NheI")
-                    else:    
+                    else:     # Trying to label the restriction sites as per our knowledge of REs
                         print("Site No.: ",count,"\tat ",start2+1," - ",end2,"\tRE Site: ",site2,"\tRE Name: ",RE_sites[site2])
-                else:
+                else:                  
                     print("Site No.: ",count,"\tat ",start2+1," - ",end2,"\tRE Site: ",site2)
         if (site2[1]=='a' and site2[2]=='a' and site2[3]=='t' and site2[4]=='t' and (site2[0]=='a' or site2[0]=='g') and (site2[5]=='c' or site2[5]=='t')):           # recognition site for ApoI is RAATTY. R = A or G  and   Y = C or T
             print("Site No.: ",count,"\tat ",start2+1," - ",end2,"\tRE Site: ",site2,"\tRE Name: ApoI")
@@ -72,7 +76,7 @@ while (end2-l < 6):
                 if (site2 in RE_sites):
                     if (site2 == "gctagc"):             # BmtI and NheI have the same restriction recognition sites, although they cut at different points
                         print("Site No.: ",count,"\tat ",start2+1," - ",end2,"\tRE Site: ",site2,"\tRE Name: BmtI , NheI")
-                    else:    
+                    else:     # Trying to label the restriction sites as per our knowledge of REs
                         print("Site No.: ",count,"\tat ",start2+1," - ",end2-l,"\tRE Site: ",site2,"\tRE Name: ",RE_sites[site2])
                 else:
                     print("Site No.: ",count,"\tat ",start2+1," - ",end2-l,"\tRE Site: ",site2)

@@ -3,6 +3,11 @@ In this question, we are using the M.AaaS1ORF662P gene which is a methyl transfe
 Recognition site for ApoI is RAATTY. R = A or G  and   Y = C or T
 """
 
+"""
+From the results of Mapper.png and Restriction_Map.png for the particular RE and gene sequence, we observe that 
+our results match exactly. 
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from RE import RE_sites
@@ -26,7 +31,6 @@ count = 0
 cuts = []
 
 print("Length of M.AaaS1ORF662P gene = ",l,"nt\n")
-print("UNIQUE SEQUENCES WITH LENGTH 6:\n")
 while (end1-l < 6):
     if (end1 <= l):
         site1 = DNA_seq[start1:end1:] 
