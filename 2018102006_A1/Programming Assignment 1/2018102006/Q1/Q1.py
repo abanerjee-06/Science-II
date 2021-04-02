@@ -1,4 +1,10 @@
 from genetic_code_table import genetic_code, pairs
+pairs2 = {
+    'a': 't',
+    'c': 'g',
+    'g': 'c',
+    't': 'a'
+}
 
 DNA_seq = ""
 RNA_synth = ""
@@ -9,8 +15,7 @@ DNA_seq = f.read().replace('\n','').replace('\r','')
 print("DNA SEQUENCE READ:\t", DNA_seq,"\n")
 
 for i in DNA_seq:                                                   # Converting from DNA to RNA sequence using the base pairs imported from genetic_code_table
-    RNA_synth += pairs[i]
-RNA_synth = RNA_synth[::-1]
+    RNA_synth += pairs[pairs2[i]]
 print("RNA SEQUENCE:\t", RNA_synth,"\n")
 
 print("PROTEIN SYNTHESIZED: ")                                      
@@ -32,7 +37,7 @@ while i < len(RNA_synth):
             else:
                 break
         if (end == j):
-            print("Protein No: ",start_no,"\tRNA sequence number: ",i,":",end," Protein: ",protein,"RNA SEQUENCE: ",RNA_synth[i:end])   # Displaying the protein synthesis
+            print("Protein No: ",start_no,"\tRNA sequence number: ",i+1,":",end," Protein: ",protein,"RNA SEQUENCE: ",RNA_synth[i:end])   # Displaying the protein synthesis
             protein_synth += protein + "\n"                             # with the corresponding RNA sequence and also mentioning start , end positions
             i = end
     i += 1
