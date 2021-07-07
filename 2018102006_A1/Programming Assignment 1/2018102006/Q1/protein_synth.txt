@@ -1,5 +1,1 @@
-Met 
-Met Lys Pro Val Asp Leu Val Thr Ala 
-Met Tyr Leu Thr Pro Leu Gln Thr Gly Phe Ala Glu Asn Ile Trp Val His Ser Arg Val Met Ser Lys Gln Val Ile Pro Ala Lys Asn Asn 
-Met Met Ser Arg Leu Gln Glu Pro Asn Tyr Pro Val Arg Arg Ser Asn Ser Ser Gln Arg 
-Met Val Pro 
+Met Met Gly Ala Arg Arg Thr Thr 

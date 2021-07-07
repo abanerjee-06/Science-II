@@ -7,9 +7,11 @@ pairs = {
     't': 'a'
 }
 
-DNA_seq = ""
-f = open("pbr322.txt","r")
-DNA_seq = f.read().replace('\n','').replace('\r','')
+# DNA_seq = ""
+# f = open("pbr322.txt","r")
+# DNA_seq = f.read().replace('\n','').replace('\r','')
+DNA_seq = "GAGAGAGAGAGAGA"
+DNA_seq = DNA_seq.lower()
 
 l = len(DNA_seq)                    # Sequences of lengths 4,6,8
 start1 = 0

@@ -1,18 +1,20 @@
 from genetic_code_table import genetic_code, pairs
 pairs2 = {
-    'a': 't',
-    'c': 'g',
-    'g': 'c',
-    't': 'a'
+    'A': 't',
+    'C': 'g',
+    'G': 'c',
+    'T': 'a'
 }
 
 DNA_seq = ""
 RNA_synth = ""
 protein_synth = ""
 
-f = open("DNA.txt","r")                                             # Displaying the DNA sequence
-DNA_seq = f.read().replace('\n','').replace('\r','')
-print("DNA SEQUENCE READ:\t", DNA_seq,"\n")
+# f = open("testq1.txt","r")                                             # Displaying the DNA sequence
+# DNA_seq = f.read().replace('\n','').replace('\r','')
+# print("DNA SEQUENCE READ:\t", DNA_seq,"\n")
+# DNA_seq = "GTTTCATTATACCAGTTTAGATCTATCGACAGGGCGTTGAGTGTGTGCTTACTCACGGCTGGCATGTAGGTAACAGTAGTGGGGAAGCGTAACATCTGAGGCCTGACTCACATATAGAGTGTCGACCAAGGGGTGAAGCATCATACGCCATACAGGCCCCTAGCGAAACGCCTAGTCTAAAGACACACGAGAATGAAACCCGTGGACTTGGTTACAGCGTAATAATCTGGTCAGAGCTGGTCCGGCGCTGGCGATGTACCTTACGCCACTGCAAACCGGCTTTGCAGAGAACATCTGGGTACATTCCCGTGTCATGTCAAAGCAGGTGATTCCCGCGAAAAACAATTAACGACGCATTTGCTATTGACGAAGTCCTAGTTCTCCGAATTGAGCGGGAGACATATGATGTCGAGACTGCAGGAACCGAATTATCCTGTCCGCAGATCCAATAGCTCACAGAGGTAAGGGGAGTGTGATGGTGCCCTAGGGTGTTTGAACG"
+DNA_seq = "ATGATGGGGGCCCGACGTACGACGTAA"
 
 for i in DNA_seq:                                                   # Converting from DNA to RNA sequence using the base pairs imported from genetic_code_table
     RNA_synth += pairs[pairs2[i]]
